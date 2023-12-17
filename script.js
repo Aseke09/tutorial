@@ -1,9 +1,15 @@
-const title = "title";
-const screens = "screens";
+const title = "tutorial";
+const screens = "Простые, Сложные, Интерактивные";
 const screenPrice = 10;
-const rollback = null;
+const rollback = 20;
 const fullPrice = 100;
 const adaptive = true;
 
-alert("Hello");
-console.log("Hello");
+
+console.log(typeof title);
+console.log(typeof fullPrice);
+console.log(typeof adaptive);
+
+console.log(screenPrice + "$")
+console.log(fullPrice + "$")
+console.log(fullPrice * (rollback/100) + "$")
