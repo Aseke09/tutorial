@@ -7,9 +7,15 @@ const adaptive = true;
 
 
 console.log(typeof title);
+console.log(screens.length)
+
 console.log(typeof fullPrice);
 console.log(typeof adaptive);
 
 console.log(screenPrice + "$")
 console.log(fullPrice + "$")
 console.log(fullPrice * (rollback/100) + "$")
+
+let strToArr = screens.toLowerCase().split('')
+
+console.log(strToArr)
