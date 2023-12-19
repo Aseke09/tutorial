@@ -16,6 +16,6 @@ console.log(screenPrice + "$")
 console.log(fullPrice + "$")
 console.log(fullPrice * (rollback/100) + "$")
 
-let strToArr = screens.toLowerCase().split('')
+let strToArr = screens.toLowerCase().split(',')
 
 console.log(strToArr)
