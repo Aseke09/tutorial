@@ -26,14 +26,14 @@ const showTypeOf = function(variable){
 }
 
 const getRollBackMessage = function(price){
-    if(price < 0){
+    if(price <= 0){
        return "Что то пошло не так"
     }
-    else if(price >= 30000){
+    if(price >= 30000){
        return "Даем скидку в 10%"
-    } else if(price >= 15000 && price < 30000){
+    } if(price >= 15000 && price < 30000){
        return "Даем скидку в 5%"
-    } else if(price < 15000 && price > 0){
+    } if(price < 15000 && price > 0){
        return "Скидка не предусмотрена"
     }
 }
@@ -47,7 +47,7 @@ function getFullPrice(price1, price2){
 }
 
 const getTitle = function(str){
-   return title = str[0].toUpperCase() + str.slice(1)
+   return title = str[0].toUpperCase() + str.slice(1).toLowerCase()
 }
 
 function getServicePercentPrices(price1, price2){
