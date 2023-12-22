@@ -1,26 +1,33 @@
 // блок переменных 
-let title = prompt("Как называется ваш проект?");
-const screens = prompt("Какие типы экранов нужно разработать?");
-const screenPrice = +prompt("Сколько будет стоить данная работа?");
-const adaptive = confirm("Нужен ли адаптив на сайте?");
-
-const addService1 = prompt("Какой дополнительный тип услуги нужен?")
-const addService2 = prompt("Какой дополнительный тип услуги нужен?")
-
-const addServicePrice1 = +prompt("Сколько это будет стоить?")
-const addServicePrice2 = +prompt("Сколько это будет стоить?")
-
-// const fullPrice = screenPrice + addServicePrice1 + addServicePrice2;
+let title
+let screens
+let screenPrice;
+let adaptive;
+let addService1;
+let addService2;
 let fullPrice; 
-const rollback = 20;
-// const servicePercentPrice = Math.ceil((fullPrice - (fullPrice * (rollback/100))))
 let servicePercentPrice;
 let allServicePrices; 
-
+const rollback = 20;
 
 
 
 // блок функций
+const isNumber = function (num) {
+   return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0
+}
+
+const asking = function(){
+   title = prompt("Как называется ваш проект?");
+   screens = prompt("Какие типы экранов нужно разработать?");
+   
+   do{
+      screenPrice = +prompt("Сколько будет стоить данная работа?");
+   } while(!isNumber(screenPrice))
+
+   adaptive = confirm("Нужен ли адаптив на сайте?");
+}
+
 const showTypeOf = function(variable){
     console.log(variable, typeof variable)
 }
@@ -38,8 +45,24 @@ const getRollBackMessage = function(price){
     }
 }
 
-const getAllServicePrices = function(price1, price2){
-   return price1 + price2
+const getAllServicePrices = function(){
+   let sum = 0;
+    
+   for(let i = 0; i < 2; i++){
+
+      if(i === 0){
+         addService1 = prompt("Какой дополнительный тип услуги нужен?")
+      } if (i === 1){
+         addService2 = prompt("Какой дополнительный тип услуги нужен?")
+      }
+      do {
+         sum += +prompt("Сколько это будет стоить?")
+      }
+      
+      while(!isNumber(sum)) 
+         
+   }
+   return sum
 }
 
 function getFullPrice(price1, price2){
@@ -54,7 +77,8 @@ function getServicePercentPrices(price1, price2){
    return servicePercentPrice = Math.ceil((price1 - (price1 * (price2/100)))) 
 }
 
-allServicePrices = getAllServicePrices(addServicePrice1, addServicePrice2)
+asking()
+allServicePrices = getAllServicePrices()
 fullPrice = getFullPrice(screenPrice, allServicePrices)
 showTypeOf(title)
 showTypeOf(screenPrice)
@@ -64,7 +88,7 @@ console.log(getRollBackMessage(fullPrice))
 console.log(getServicePercentPrices(fullPrice, rollback))
 
 // console.log(getTitle(title))
-// console.log(allServicePrices)
+console.log(allServicePrices)
 // console.log(fullPrice)
 // console.log(title);
 // console.log(screens)
