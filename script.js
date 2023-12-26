@@ -1,60 +1,42 @@
-// блок переменных 
-let title
-let screens
-let screenPrice;
-let adaptive;
-let addService1;
-let addService2;
-let fullPrice; 
-let servicePercentPrice;
-let allServicePrices; 
-const rollback = 20;
 
 
-
-// блок функций
 const isNumber = function (num) {
    return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0
 }
 
-const asking = function(){
-   title = prompt("Как называется ваш проект?");
-   screens = prompt("Какие типы экранов нужно разработать?");
+const appData = {
+   title: '',
+   screens: '',
+   screenPrice: 0,
+   adaptive: false,
+   addService1: '',
+   addService2: '',
+   fullPrice: 0,
+   servicePercentPrice: 0,
+   allServicePrices: 0,
+   rollback: 20,
+
+   start: function(){
+      appData.title = prompt("Как называется ваш проект?");
+      appData.screens = prompt("Какие типы экранов нужно разработать?");
+      
+      do{
+         appData.screenPrice = +prompt("Сколько будет стоить данная работа?");
+      } while(!isNumber(appData.screenPrice))
    
-   do{
-      screenPrice = +prompt("Сколько будет стоить данная работа?");
-   } while(!isNumber(screenPrice))
+      appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+   },
 
-   adaptive = confirm("Нужен ли адаптив на сайте?");
-}
-
-const showTypeOf = function(variable){
-    console.log(variable, typeof variable)
-}
-
-const getRollBackMessage = function(price){
-    if(price <= 0){
-       return "Что то пошло не так"
-    }
-    if(price >= 30000){
-       return "Даем скидку в 10%"
-    } if(price >= 15000 && price < 30000){
-       return "Даем скидку в 5%"
-    } if(price < 15000 && price > 0){
-       return "Скидка не предусмотрена"
-    }
-}
-
-const getAllServicePrices = function(){
-   let sum = 0;
-   let price = 0;
+   getAllServicePrices: function(){
+      let sum = 0;
+      let price = 0;
 
    for(let i = 0; i < 2; i++){
 
       if(i === 0){
-         addService1 = prompt("Какой дополнительный тип услуги нужен?")
+         appData.addService1 = prompt("Какой дополнительный тип услуги нужен?")
       } if (i === 1){
-         addService2 = prompt("Какой дополнительный тип услуги нужен?")
+         appData.addService2 = prompt("Какой дополнительный тип услуги нужен?")
       }
       do {
          price = +prompt("Сколько это будет стоить?")
@@ -62,42 +44,53 @@ const getAllServicePrices = function(){
         sum += price
       }
    return sum 
+},
+
+ getFullPrice: function(){
+   return +appData.screenPrice + appData.allServicePrices
+},
+
+getServicePercentPrices: function(){
+   return  Math.ceil((appData.fullPrice - (appData.fullPrice * (appData.rollback/100)))) 
+},
+
+getTitle: function(){
+   return appData.title.trim()[0].toUpperCase() + appData.title.trim().substring(1).toLowerCase()
+},
+
+getRollBackMessage: function(price){
+   if(price <= 0){
+      return "Что то пошло не так"
+   }
+   if(price >= 30000){
+      return "Даем скидку в 10%"
+   } if(price >= 15000 && price < 30000){
+      return "Даем скидку в 5%"
+   } if(price < 15000 && price > 0){
+      return "Скидка не предусмотрена"
+   }
+},
+
+logger: function(){
+  for (let key in appData){
+      console.log("Ключ:" +  key   )
+  }
+
 }
 
-function getFullPrice(price1, price2){
-   return price1 + price2
+
 }
 
-const getTitle = function(str){
-   return title = str[0].toUpperCase() + str.slice(1).toLowerCase()
-}
+appData.start();
+appData.allServicePrices = appData.getAllServicePrices();
+appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices)
+appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback)
+appData.title = appData.getTitle()
+appData.getRollBackMessage(appData.fullPrice)
+appData.logger();
 
-function getServicePercentPrices(price1, price2){
-   return servicePercentPrice = Math.ceil((price1 - (price1 * (price2/100)))) 
-}
-
-asking()
-allServicePrices = getAllServicePrices()
-fullPrice = getFullPrice(screenPrice, allServicePrices)
-showTypeOf(title)
-showTypeOf(screenPrice)
-showTypeOf(adaptive)
-console.log(screens)
-console.log(getRollBackMessage(fullPrice))
-console.log(getServicePercentPrices(fullPrice, rollback))
-
-// console.log(getTitle(title))
-console.log(allServicePrices)
-// console.log(fullPrice)
-// console.log(title);
-// console.log(screens)
-// console.log(screenPrice + "$")
-
-// console.log( adaptive);
-// console.log(fullPrice + "$")
-// console.log(servicePercentPrice)
-// console.log(fullPrice * (rollback/100))
+console.log(appData.fullPrice)
+console.log(appData.servicePercentPrice)
 
 
-// let strToArr = screens.toLowerCase().split(',')
-// console.log(strToArr)
+
