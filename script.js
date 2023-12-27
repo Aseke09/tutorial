@@ -16,7 +16,11 @@ const appData = {
    allServicePrices: 0,
    rollback: 20,
 
-   start: function(){
+   isNumber: function (num) {
+      return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0
+   },
+
+   asking: function(){
       appData.title = prompt("Как называется ваш проект?");
       appData.screens = prompt("Какие типы экранов нужно разработать?");
       
@@ -25,6 +29,16 @@ const appData = {
       } while(!isNumber(appData.screenPrice))
    
       appData.adaptive = confirm("Нужен ли адаптив на сайте?");
+   },
+   
+   start: function(){
+      appData.asking()
+      appData.allServicePrices = appData.getAllServicePrices();
+      appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices)
+      appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback)
+      appData.title = appData.getTitle()
+      appData.getRollBackMessage(appData.fullPrice)
+      appData.logger();
    },
 
    getAllServicePrices: function(){
@@ -72,9 +86,13 @@ getRollBackMessage: function(price){
 },
 
 logger: function(){
+   console.log(appData.fullPrice)
+  console.log(appData.servicePercentPrice)
   for (let key in appData){
       console.log("Ключ:" +  key   )
+      
   }
+  
 
 }
 
@@ -82,15 +100,9 @@ logger: function(){
 }
 
 appData.start();
-appData.allServicePrices = appData.getAllServicePrices();
-appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices)
-appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback)
-appData.title = appData.getTitle()
-appData.getRollBackMessage(appData.fullPrice)
-appData.logger();
 
-console.log(appData.fullPrice)
-console.log(appData.servicePercentPrice)
+
+
 
 
 
