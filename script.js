@@ -1,8 +1,8 @@
 
 
-const isNumber = function (num) {
-   return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0
-}
+// const isNumber = function (num) {
+//    return !isNaN(parseFloat(num)) && isFinite(num) && num !== 0
+// }
 
 const appData = {
    title: '',
@@ -26,7 +26,7 @@ const appData = {
       
       do{
          appData.screenPrice = +prompt("Сколько будет стоить данная работа?");
-      } while(!isNumber(appData.screenPrice))
+      } while(!appData.isNumber(appData.screenPrice))
    
       appData.adaptive = confirm("Нужен ли адаптив на сайте?");
    },
@@ -54,7 +54,7 @@ const appData = {
       }
       do {
          price = +prompt("Сколько это будет стоить?")
-      }while(!isNumber(price)) 
+      }while(!appData.isNumber(price)) 
         sum += price
       }
    return sum 
