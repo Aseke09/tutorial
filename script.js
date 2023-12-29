@@ -23,7 +23,7 @@ const appData = {
    asking: function(){
       do{
          appData.title = prompt("Как называется ваш проект?");
-      } while (appData.isNumber(appData.title))
+      } while (!appData.isString(appData.title))
       console.log(typeof appData.title)
 
       for(let i = 0; i < 2; i++){
@@ -32,10 +32,15 @@ const appData = {
 
        do{
          name = prompt("Какие типы экранов нужно разработать?");
-         price = +prompt("Сколько будет стоить данная работа?");
    
          console.log(appData.isString(name))
-       }while(appData.isString(name) && !appData.isNumber(price) )
+       }while(!appData.isString(name))
+
+       do{
+         price = +prompt("Сколько будет стоить данная работа?");
+   
+         console.log(appData.isString(price))
+       }while(!appData.isNumber(price))
 
        appData.screens.push({id: i, name: name, price: price })
 
@@ -49,8 +54,10 @@ const appData = {
 
          do {
             name = prompt("Какой дополнительный тип услуги нужен?");
+         }while(!appData.isString(name)) 
+         do {
             price = +prompt("Сколько это будет стоить?")
-         }while(appData.isString(name) && !appData.isNumber(price)) 
+         }while(!appData.isNumber(price)) 
            
            appData.addServices[name] = +price;
            console.log(typeof name) 
