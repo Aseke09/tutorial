@@ -4,7 +4,7 @@ const appData = {
    screens: [],
    screenPrice: 0,
    adaptive: false,
-   addServices: {},
+   addServices: [],
    fullPrice: 0,
    servicePercentPrice: 0,
    allServicePrices: 0,
@@ -59,7 +59,8 @@ const appData = {
             price = +prompt("Сколько это будет стоить?")
          }while(!appData.isNumber(price)) 
            
-           appData.addServices[name] = +price;
+         //   appData.addServices[name] = +price;
+         appData.addServices.push({id: i, name: name, price: price});
            console.log(typeof name) 
            console.log(typeof price)
          }
@@ -67,9 +68,10 @@ const appData = {
    },
 
    addPrices: function(){
-      for(let screen of appData.screens){
-         appData.screenPrice += +screen.price
-      }
+      // for(let screen of appData.screens){
+      //    appData.screenPrice += +screen.price
+      // }
+      appData.screenPrice = appData.screens.reduce((acc, currentValue) => acc + currentValue.price)
 
       for(let key in appData.addServices){
          appData.allServicePrices += appData.addServices[key]
