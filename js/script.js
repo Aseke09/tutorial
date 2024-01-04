@@ -8,11 +8,11 @@ const otherItems2 = document.querySelectorAll('.other-items.number');
 const inputRange = document.querySelector('.rollback input[type = "range"]');
 const span = document.querySelector('.rollback span[class = "range-value"]');
 
-const totalInput1 = document.getElementsByClassName('total-input')[0]
-const totalInput2 = document.getElementsByClassName('total-input')[1]
-const totalInput3 = document.getElementsByClassName('total-input')[2]
-const totalInput4 = document.getElementsByClassName('total-input')[3]
-const totalInput5 = document.getElementsByClassName('total-input')[4]
+const total = document.getElementsByClassName('total-input')[0]
+const totaCount = document.getElementsByClassName('total-input')[1]
+const totalCountOther = document.getElementsByClassName('total-input')[2]
+const totalFullCount = document.getElementsByClassName('total-input')[3]
+const totalCountRollback = document.getElementsByClassName('total-input')[4]
 
 
 let listScreen = document.querySelectorAll('.screen'); 
@@ -26,8 +26,8 @@ console.log(otherItems2)
 console.log(inputRange)
 console.log(span)
 console.log(listScreen)
-console.log(totalInput1)
-console.log(totalInput5)
+console.log(total)
+console.log(totalCountRollback)
 // const appData = {
 //     title: '',
 //     screens: [],
